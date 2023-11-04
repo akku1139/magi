@@ -30,6 +30,7 @@ jobs:
           cd $HOME/work/magi/magi/magi/src
           ls
           make -f makefile.unix
+          ls
       - name: Upload
         uses: actions/upload-artifact@v3.1.3
         with:
