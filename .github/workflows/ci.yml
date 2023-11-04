@@ -7,3 +7,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
+
+      - name: Debug
+        run: ls
+        
