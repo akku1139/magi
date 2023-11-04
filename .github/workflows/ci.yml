@@ -10,6 +10,9 @@ jobs:
         with:
           path: magi
 
+      - name: ls
+        run: las
+
       - name: Install dependencies
         run: |
           sudo apt update
