@@ -10,9 +10,6 @@ jobs:
         with:
           path: magi
 
-      - name: ls
-        run: pwd magi
-
       - name: Install dependencies
         run: |
           sudo apt update
@@ -29,5 +26,5 @@ jobs:
 
       - name: Compile Magi
         run: |
-          cd $HOME/magi/src
+          cd $HOME/work/magi/magi/src/
           make -f makefile.unix
