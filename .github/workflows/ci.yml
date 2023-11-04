@@ -10,4 +10,9 @@ jobs:
 
       - name: Debug
         run: ls
-        
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
+
