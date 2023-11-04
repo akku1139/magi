@@ -11,7 +11,7 @@ jobs:
           path: magi
 
       - name: ls
-        run: las
+        run: ls
 
       - name: Install dependencies
         run: |
