@@ -7,21 +7,3 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
-
-      - name: Debug
-        run: ls
-        
-      - name: Install dependencies
-        run: |
-          sudo apt update
-          sudo apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
-
-      - name: Install BerkelyDB
-        run: |
-          wget https://github.com/BastelPichi/berkely-db-fixed/releases/download/fix/db-4.8.30.NC.tar.gz
-          tar xf db-4.8.30.NC.tar.gz
-          cd db-4.8.30.NC/build_unix
-          ../dist/configure -q --disable-shared --enable-cxx --disable-replication --with-pic --prefix=../../berkely
-          make
-          make install
-          
