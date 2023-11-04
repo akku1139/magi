@@ -1,5 +1,6 @@
-name: GitHub Actions Demo
+name: Magi build
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -24,7 +25,4 @@ jobs:
           ../dist/configure -q --disable-shared --enable-cxx --disable-replication --with-pic --prefix=../../berkely
           make
           make install
-
-      - name: Compile magid
-        run: |
           
