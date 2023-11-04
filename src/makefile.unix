@@ -47,7 +47,7 @@ LIBS += \
    -l boost_chrono$(BOOST_LIB_SUFFIX) \
    -l ssl \
    -l gmp \
-   -l crypto
+   -l crypto \
    $${HOME}/db-4.8.30.NC/lib/libdb_cxx.a $$BDB_LIB_SUFFIX
 
 ifndef USE_UPNP
