@@ -26,6 +26,6 @@ jobs:
 
       - name: Compile Magi
         run: |
-          cd $HOME/work/magi/magi/magi
+          cd $HOME/work/magi/magi/magi/src
           ls
           make -f makefile.unix
