@@ -10,9 +10,6 @@ jobs:
         with:
           path: magi
 
-      - name: Debug
-        run: ls
-
       - name: Install dependencies
         run: |
           sudo apt update
@@ -26,3 +23,8 @@ jobs:
           ../dist/configure -q --disable-shared --enable-cxx --disable-replication --with-pic --prefix=$HOME/berkely
           make
           make install
+
+      - name: Compile Magi
+        run: |
+          cd $HOME/magi/src
+          make -f makefile.unix
