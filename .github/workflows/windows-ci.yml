@@ -29,7 +29,7 @@ jobs:
           wget https://github.com/BastelPichi/berkely-db-fixed/releases/download/fix/db-4.8.30.NC.tar.gz
           tar xf db-4.8.30.NC.tar.gz
           cd db-4.8.30.NC/build_windows
-          ../dist/configure --host=x86_64-w64-mingw -q --disable-shared --enable-mingw --enable-cxx --disable-replication --with-pic --prefix=$HOME/berkely
+          ../dist/configure --host=x86_64-w64-mingw32 -q --disable-shared --enable-mingw --enable-cxx --disable-replication --with-pic --prefix=$HOME/berkely
           make
           make install
 
