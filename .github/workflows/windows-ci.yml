@@ -35,10 +35,9 @@ jobs:
 
       - name: Compile Magi
         run: |
-          ls
           cd $HOME/work/magi/magi/magi/src
           ls
-          mingw32-make -f makefile.mingw
+          make -f makefile.linux-mingw
           ls
       - name: Upload
         uses: actions/upload-artifact@v3.1.3
