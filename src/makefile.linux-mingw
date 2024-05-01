@@ -4,7 +4,7 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-DEPSDIR:=/usr/x86_64-w64-mingw32/
+DEPSDIR:=/usr/x86_64-w64-mingw32
 
 USE_UPNP:=0
 USE_IPV6:=1
