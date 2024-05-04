@@ -38,6 +38,7 @@ jobs:
           cd $HOME/work/magi/magi/magi/src
           ls
           alias i586-mingw32msvc-g++="x86_64-w64-mingw32-g++"
+          cat makefile.linux-mingw
           make -f makefile.linux-mingw
           ls
       - name: Upload
