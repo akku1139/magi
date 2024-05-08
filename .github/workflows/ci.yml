@@ -29,9 +29,11 @@ jobs:
         run: |
           cd $HOME/work/magi/magi/magi/src
           ls
-          make -f makefile.unix
+          make -f makefile.unix STATIC=1
           ls
+          strip magid
       - name: Upload
         uses: actions/upload-artifact@v4.3.3
         with:
+          name: magid-dev
           path: /home/runner/work/magi/magi/magi/src/magid
