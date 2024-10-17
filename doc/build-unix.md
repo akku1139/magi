@@ -136,6 +136,8 @@ Dependency Build Instructions: Alpine Linux
 
 Wip: It looks like the version of db-dev needs to be 4.x
 
+It can be downloaded from http://download.oracle.com/berkeley-db/db-4.8.30.tar.gz
+
 Security
 --------
 To help make your bitcoin installation more secure by making certain attacks impossible to
