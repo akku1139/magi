@@ -58,7 +58,9 @@ namespace boost {
 #endif
 
 #ifndef WIN32
+#ifdef _GLIBC_
 #include <execinfo.h>
+#endif
 #endif
 
 
