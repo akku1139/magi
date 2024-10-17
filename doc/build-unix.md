@@ -134,6 +134,8 @@ Dependency Build Instructions: Alpine Linux
 
 	apk add boost-dev db-dev make g++ gmp-dev openssl-dev miniupnpc-dev
 
+Wip: It looks like the version of db-dev needs to be 4.x
+
 Security
 --------
 To help make your bitcoin installation more secure by making certain attacks impossible to
