@@ -129,6 +129,11 @@ See above db4.8 building if you cannot find it through apt installation. The ver
 	sudo apt-get install libboost-all-dev
 	sudo apt-get install libprotobuf-dev libqrencode-dev
 
+Dependency Build Instructions: Alpine Linux
+----------------------------------------------
+
+	apk add boost-dev db-dev make g++ gmp-dev openssl-dev miniupnpc-dev
+
 Security
 --------
 To help make your bitcoin installation more secure by making certain attacks impossible to
