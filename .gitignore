@@ -57,6 +57,7 @@ qt-builds/version-og/build
 build*
 builds
 build/*
+!src/db-4.8.30.NC/build*
 
 # Other builds
 qt-builds/*
