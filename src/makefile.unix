@@ -38,6 +38,8 @@ TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 #BOOST_LIB_SUFFIX = -mt-s
 
 # for boost 1.37, add -mt to the boost libraries
+BDB_CXX_A = db-4.8.30.NC/build_unix/libdb_cxx.a
+
 LIBS += \
  -Wl,-B$(LMODE) \
    -l boost_system$(BOOST_LIB_SUFFIX) \
@@ -48,7 +50,7 @@ LIBS += \
    -l ssl \
    -l gmp \
    -l crypto \
-   -l db_cxx
+   -l $(BDB_CXX_A)
 
 ifndef USE_UPNP
 	override USE_UPNP = -
@@ -172,6 +174,12 @@ leveldb/libleveldb.a:
 	@echo "Building LevelDB ..."; cd leveldb; make libleveldb.a libmemenv.a; cd ..;
 obj/txdb.o: leveldb/libleveldb.a
 
+# Berkeley DB
+$(BDB_CXX_A): FORCE
+	cd db-4.8.30.NC/build_unix
+	../dist/configure --enable-cxx --disable-shared --with-pic
+	make
+
 test check: test_magi FORCE
 	./test_magi
 
@@ -212,7 +220,7 @@ obj/%.o: hash/%.c
 	      -e '/^$$/ d' -e 's/$$/ :/' < $(@:%.o=%.d) >> $(@:%.o=%.P); \
 	  rm -f $(@:%.o=%.d)
 
-magid: $(OBJS:obj/%=obj/%)
+magid: $(OBJS:obj/%=obj/%) $(BDB_CXX_A)
 	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ $(xLDFLAGS) $(LIBS)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
@@ -235,4 +243,5 @@ clean:
 	-rm -f obj-test/*.P
 	-rm -f obj/build.h
 
+.PHONY: FORCE
 FORCE:
