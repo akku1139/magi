@@ -219,7 +219,7 @@ obj/%.o: hash/%.c
 	  rm -f $(@:%.o=%.d)
 
 magid: $(OBJS:obj/%=obj/%)
-	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ $(xLDFLAGS) $(LIBS)
+	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ $(xLDFLAGS) $(LIBS) $(BDB_CXX_A)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
 
