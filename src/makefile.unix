@@ -176,9 +176,8 @@ obj/txdb.o: leveldb/libleveldb.a
 
 # Berkeley DB
 $(BDB_CXX_A): FORCE
-	cd db-4.8.30.NC/build_unix
-	../dist/configure --enable-cxx --disable-shared --with-pic
-	make
+	cd db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic
+	cd db-4.8.30.NC/build_unix && make
 
 test check: test_magi FORCE
 	./test_magi
