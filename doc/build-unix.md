@@ -142,6 +142,8 @@ It can be downloaded from http://download.oracle.com/berkeley-db/db-4.8.30.tar.g
 
 https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=libdb-4.8
 
+https://github.com/aaronmee/magi-utilities/blob/main/src/db-4.8.sh
+
 Security
 --------
 To help make your bitcoin installation more secure by making certain attacks impossible to
