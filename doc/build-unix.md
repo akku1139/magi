@@ -132,9 +132,11 @@ See above db4.8 building if you cannot find it through apt installation. The ver
 Dependency Build Instructions: Alpine Linux
 ----------------------------------------------
 
-	apk add boost-dev db-dev make g++ gmp-dev openssl-dev miniupnpc-dev
+	apk add boost-dev make g++ gmp-dev openssl-dev miniupnpc-dev
 
 Wip: It looks like the version of db-dev needs to be 4.x
+
+Do not install `db-dev`
 
 It can be downloaded from http://download.oracle.com/berkeley-db/db-4.8.30.tar.gz
 
