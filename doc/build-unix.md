@@ -16,21 +16,25 @@ Build magid
 To Build On i386, amd64
 --------
 	cd src/
+ 	make -f makefile.unix bdb
 	make -f makefile.unix                          # Headless magi
 
 To Build On armv6l
 --------
 	cd src/
+  	make -f makefile.unix bdb
 	make -f makefile.unix xCPUARCH=armv6l           # Headless magi
 
 To Build On armv7l
 --------
 	cd src/
+ 	make -f makefile.unix bdb
 	make -f makefile.unix xCPUARCH=armv7l           # Headless magi
 
 To Build On aarch64
 --------
 	cd src/
+ 	make -f makefile.unix bdb
 	make -f makefile.unix xCPUARCH=aarch64           # Headless magi
 
 The release is built with GCC and then "strip bitcoind" to strip the debug symbols, which reduces the executable size by about 90%.
