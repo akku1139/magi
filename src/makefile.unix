@@ -31,7 +31,7 @@ else
 endif
 
 DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/hash $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH) db-4.8.30.NC/build_unix) $(OPT_INCLUDE_PATHS)
-LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
+LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH) $(BDB_CXX_A))
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 
@@ -49,8 +49,7 @@ LIBS += \
    -l boost_chrono$(BOOST_LIB_SUFFIX) \
    -l ssl \
    -l gmp \
-   -l crypto \
-   -l $(BDB_CXX_A)
+   -l crypto
 
 ifndef USE_UPNP
 	override USE_UPNP = -
