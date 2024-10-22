@@ -1,4 +1,4 @@
-name: Magi build
+name: Magi build (Windows)
 on: [push]
 
 jobs:
