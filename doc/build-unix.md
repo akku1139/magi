@@ -142,6 +142,8 @@ Dependency Build Instructions: Alpine Linux
 
 Do not install `db-dev`
 
+Install `boost-static` `openssl-libs-static` for static linking ( `make STATIC=1` ).
+
 Security
 --------
 To help make your bitcoin installation more secure by making certain attacks impossible to
