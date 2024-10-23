@@ -14,11 +14,11 @@ jobs:
           sudo apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
 
       - name: Build Berkeley DB
-        run: cd src && make -f makefile.unix bdb
+        run: cd src && make -f makefile.unix bdb -j6
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix STATIC=1
+          cd src && make -f makefile.unix STATIC=1 -j6
           ls
           strip magid
 
