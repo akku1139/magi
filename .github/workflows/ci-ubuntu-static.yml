@@ -1,0 +1,29 @@
+name: Magi build (Ubuntu)
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
+
+      - name: Build Berkeley DB
+        run: cd src && make -f makefile.unix bdb -j6
+
+      - name: Compile Magi
+        run: |
+          cd src && make -f makefile.unix -j6 STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc"
+          ls
+          strip magid
+
+      - name: Upload
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: magid-dev
+          path: ./src/magid
