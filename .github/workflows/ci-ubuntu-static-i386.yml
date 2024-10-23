@@ -1,4 +1,4 @@
-name: Magi build (Ubuntu)
+name: Magi build (Ubuntu Static i386)
 on: [push]
 
 jobs:
@@ -14,11 +14,12 @@ jobs:
           sudo apt install build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
 
       - name: Build Berkeley DB
-        run: cd src && make -f makefile.unix bdb -j6
+        run: |
+          cd src && make -f makefile.unix bdb -j6 CFLAGS="-m32" CXXFLAGS="-m32"
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix -j6 STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc"
+          cd src && make -f makefile.unix -j6 CXXFLAGS="-m32" STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc" 
           ls
           strip magid
 
