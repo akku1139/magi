@@ -11,15 +11,16 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
+          sudo apt install crossbuild-essential-i386 libssl-dev:i386 libgmp-dev:i386 libminiupnpc-dev:i386 libboost-all-dev:i386 libprotobuf-dev:i386 libqrencode-dev:i386 -y
 
       - name: Build Berkeley DB
         run: |
-          cd src && make -f makefile.unix bdb -j6 CFLAGS="-m32" CXXFLAGS="-m32"
+          cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic --build=i686-linux-gnu CFLAGS=-m32 CXXFLAGS=-m32 LDFLAGS=-m32
+          cd src/db-4.8.30.NC/build_unix && make
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix -j6 CXXFLAGS="-m32" STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc" 
+          cd src && make -f makefile.unix -j6 CXX="i686-linux-gnu-gcc" CXXFLAGS="-m32" STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc" 
           ls
           strip magid
 
