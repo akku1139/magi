@@ -10,7 +10,9 @@ jobs:
 
       - name: Install dependencies
         run: |
+          dpkg --add-architecture i386
           sudo apt update
+          sudo apt upgrade
           sudo apt install crossbuild-essential-i386 libssl-dev:i386 libgmp-dev:i386 libminiupnpc-dev:i386 libboost-all-dev:i386 libprotobuf-dev:i386 libqrencode-dev:i386 -y
 
       - name: Build Berkeley DB
