@@ -22,7 +22,7 @@ jobs:
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix -j6 STATIC=1 LDFLAGS="-static -nostdlib /usr/lib/i386-linux-gnu/libc_nonshared.a /usr/lib/gcc/i686-linux-gnu/12/libstdc++.a /usr/lib/gcc/i686-linux-gnu/12/libstdc++fs.a /usr/lib/gcc/i686-linux-gnu/12/libsupc++.a"
+          cd src && make -f makefile.unix -j6 STATIC=1 LDFLAGS="-static -nostdlib /usr/lib/i386-linux-gnu/libc.a /usr/lib/i386-linux-gnu/libc_nonshared.a /usr/lib/gcc/i686-linux-gnu/12/libstdc++.a /usr/lib/gcc/i686-linux-gnu/12/libstdc++fs.a /usr/lib/gcc/i686-linux-gnu/12/libsupc++.a"
           strip magid
 
       - run: |
