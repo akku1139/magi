@@ -20,7 +20,7 @@ jobs:
       - name: Build Berkeley DB
         run: |
           cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic CFLAGS="-pipe" CXXFLAGS="-pipe"
-	        make -j6
+          make -j6
 
       - name: Compile Magi
         run: |
