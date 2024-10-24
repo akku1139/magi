@@ -12,7 +12,7 @@ jobs:
         run: |
           dpkg --add-architecture amd64
           apt-get update
-          apt-get install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev libc6-dev zlib1g-dev libstdc++-dev file nodejs:amd64 -y
+          apt-get install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev libc6-dev zlib1g-dev libstdc++-12-dev file nodejs:amd64 -y
 
       - name: Checkout
         uses: actions/checkout@v4
