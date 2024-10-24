@@ -8,13 +8,14 @@ jobs:
      image: i386/debian:stable-slim
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Install dependencies
         run: |
+          dpkg --add-architecture amd64
           sudo apt update
-          sudo apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev -y
+          sudo apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev nodejs:amd64 -y
+
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Build Berkeley DB
         run: cd src && make -f makefile.unix bdb -j6
