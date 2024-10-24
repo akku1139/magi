@@ -5,7 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container:
-     image: i386/debian:stable-slim
+     image: i386/debian:stable
 
     steps:
       - name: Install dependencies
