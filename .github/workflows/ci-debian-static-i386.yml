@@ -24,7 +24,8 @@ jobs:
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix -j6 STATIC=1 CXXFLAGS="-pipe" LDFLAGS="-static /usr/lib/i386-linux-gnu/libc_nonshared.a"
+          cd src && make -f makefile.unix -j6 STATIC=1 CXXFLAGS="-pipe" LDFLAGS="-static-libgcc -static-libstdc++ -static"
+          #/usr/lib/i386-linux-gnu/libc_nonshared.a
           strip magid
 
       - run: |
