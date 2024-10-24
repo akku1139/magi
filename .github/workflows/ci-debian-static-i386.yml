@@ -26,8 +26,8 @@ jobs:
           strip magid
 
       - run: |
-        file src/magid
-        ldd src/magi
+          file src/magid
+          ldd src/magi
 
       - name: Upload
         uses: actions/upload-artifact@v4.3.3
