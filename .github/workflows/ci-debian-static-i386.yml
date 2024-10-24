@@ -23,7 +23,7 @@ jobs:
         run: |
           cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic --target=i386-linux-gnu CC=i686-linux-gnu-gcc CXX=i686-linux-gnu-g++
           # CFLAGS=-m32 CXXFLAGS=-m32 LDFLAGS=-m32
-          cd src/db-4.8.30.NC/build_unix && make
+          make -j6
 
       - name: Compile Magi
         run: |
