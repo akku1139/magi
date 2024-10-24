@@ -18,11 +18,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build Berkeley DB
-        run: cd src && make -f makefile.unix bdb -j6
+        run: |
+          cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic CFLAGS="-pipe" CXXFLAGS="-pipe"
+	        make -j6
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix -j6 STATIC=1 LDFLAGS="-static /usr/lib/i386-linux-gnu/libc_nonshared.a"
+          cd src && make -f makefile.unix -j6 STATIC=1 CXXFLAGS="-pipe" LDFLAGS="-static -lm /usr/lib/i386-linux-gnu/libc_nonshared.a"
           strip magid
 
       - run: |
