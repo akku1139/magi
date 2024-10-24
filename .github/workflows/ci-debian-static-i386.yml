@@ -21,12 +21,14 @@ jobs:
 
       - name: Build Berkeley DB
         run: |
-          cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic --build=i686-linux-gnu CFLAGS=-m32 CXXFLAGS=-m32 LDFLAGS=-m32
+          cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic --target=i386-linux-gnu CC=i686-linux-gnu-gcc CXX=i686-linux-gnu-g++
+          # CFLAGS=-m32 CXXFLAGS=-m32 LDFLAGS=-m32
           cd src/db-4.8.30.NC/build_unix && make
 
       - name: Compile Magi
         run: |
-          cd src && make -f makefile.unix -j6 CXX="i686-linux-gnu-gcc" CXXFLAGS="-m32" STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc" 
+          cd src && make -f makefile.unix -j6 CXX="i686-linux-gnu-g++" STATIC=1 LDFLAGS="-static-libstdc++ -static-libgcc" 
+          # CXXFLAGS="-m32"
           ls
           strip magid
 
