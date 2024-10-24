@@ -19,6 +19,8 @@ jobs:
           #apt-get upgrade
           aptitude install crossbuild-essential-i386 libssl-dev:i386 libgmp-dev:i386 libminiupnpc-dev:i386 libboost-all-dev:i386 libprotobuf-dev:i386 libqrencode-dev:i386 -y
 
+      - run: ls /usr/include
+
       - name: Build Berkeley DB
         run: |
           cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic --target=i386-linux-gnu CC=i686-linux-gnu-gcc CXX=i686-linux-gnu-g++
