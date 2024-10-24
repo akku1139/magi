@@ -22,6 +22,9 @@ jobs:
           cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic CFLAGS="-pipe" CXXFLAGS="-pipe"
           make -j6
 
+      - name: Build LevelDB
+        run: cd leveldb && make -j6 libleveldb.a libmemenv.a CFLAGS="-pipe" CXXFLAGS="-pipe"
+
       - name: Compile Magi
         run: |
           cd src && make -f makefile.unix -j6 STATIC=1 CXXFLAGS="-pipe" LDFLAGS="-static-libgcc -static-libstdc++ -static"
