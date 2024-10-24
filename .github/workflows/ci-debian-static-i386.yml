@@ -23,7 +23,7 @@ jobs:
           make -j6
 
       - name: Build LevelDB
-        run: cd leveldb && make -j6 libleveldb.a libmemenv.a CFLAGS="-pipe" CXXFLAGS="-pipe"
+        run: cd src/leveldb && make -j6 libleveldb.a libmemenv.a CFLAGS="-pipe" CXXFLAGS="-pipe"
 
       - name: Compile Magi
         run: |
