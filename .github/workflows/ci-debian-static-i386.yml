@@ -16,7 +16,7 @@ jobs:
           dpkg --add-architecture i386
           apt-get update
           #apt-get upgrade
-          apt-get install crossbuild-essential-i386 libssl-dev:i386 libgmp-dev:i386 libminiupnpc-dev:i386 libboost-all-dev:i386 libprotobuf-dev:i386 libqrencode-dev:i386 -y
+          aptitude install crossbuild-essential-i386 libssl-dev:i386 libgmp-dev:i386 libminiupnpc-dev:i386 libboost-all-dev:i386 libprotobuf-dev:i386 libqrencode-dev:i386 -y
 
       - name: Build Berkeley DB
         run: |
