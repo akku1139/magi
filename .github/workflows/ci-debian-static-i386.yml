@@ -12,7 +12,7 @@ jobs:
         run: |
           dpkg --add-architecture amd64
           apt update
-          apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev nodejs:amd64 -y
+          apt install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev file nodejs:amd64 -y
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,8 +23,11 @@ jobs:
       - name: Compile Magi
         run: |
           cd src && make -f makefile.unix STATIC=1 -j6
-          ls
           strip magid
+
+      - run: |
+        file src/magid
+        ldd src/magi
 
       - name: Upload
         uses: actions/upload-artifact@v4.3.3
