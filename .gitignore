@@ -25,7 +25,7 @@ src/makefile-static*.mingw
 
 # Compilation and Qt preprocessor part
 *.qm
-Makefile
+#Makefile
 m-wallet
 magi
 magi-qt
