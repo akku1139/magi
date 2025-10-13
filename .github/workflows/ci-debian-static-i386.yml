@@ -1,6 +1,10 @@
 name: Magi build (Ubuntu)
 on: [push]
 
+permissions:
+  packages: write
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,8 +39,5 @@ jobs:
           file src/magid
           ldd src/magid
 
-      - name: Upload
-        uses: actions/upload-artifact@v4.3.3
-        with:
-          name: magid-dev
-          path: ./src/magid
+      - name: Release
+        run: gh release create "build-$(date +%Y-%m-%d-%H-%M-%S)" ./src/magid
