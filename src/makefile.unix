@@ -30,7 +30,7 @@ else
 	TESTDEFS += -DBOOST_TEST_DYN_LINK
 endif
 
-DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/hash $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH)) $(OPT_INCLUDE_PATHS)
+DEFS += $(addprefix -I,$(CURDIR) $(CURDIR)/hash $(CURDIR)/obj $(BOOST_INCLUDE_PATH) $(BDB_INCLUDE_PATH) $(OPENSSL_INCLUDE_PATH) db-4.8.30.NC/build_unix) $(OPT_INCLUDE_PATHS)
 LIBS = $(addprefix -L,$(BOOST_LIB_PATH) $(BDB_LIB_PATH) $(OPENSSL_LIB_PATH))
 
 TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
@@ -38,6 +38,8 @@ TESTDEFS = -DTEST_DATA_DIR=$(abspath test/data)
 #BOOST_LIB_SUFFIX = -mt-s
 
 # for boost 1.37, add -mt to the boost libraries
+BDB_CXX_A = db-4.8.30.NC/build_unix/libdb_cxx.a
+
 LIBS += \
  -Wl,-B$(LMODE) \
    -l boost_system$(BOOST_LIB_SUFFIX) \
@@ -45,7 +47,6 @@ LIBS += \
    -l boost_program_options$(BOOST_LIB_SUFFIX) \
    -l boost_thread$(BOOST_LIB_SUFFIX) \
    -l boost_chrono$(BOOST_LIB_SUFFIX) \
-   -l db_cxx$(BDB_LIB_SUFFIX) \
    -l ssl \
    -l gmp \
    -l crypto
@@ -172,6 +173,11 @@ leveldb/libleveldb.a:
 	@echo "Building LevelDB ..."; cd leveldb; make libleveldb.a libmemenv.a; cd ..;
 obj/txdb.o: leveldb/libleveldb.a
 
+# Berkeley DB
+$(BDB_CXX_A): FORCE
+	cd db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic
+	cd db-4.8.30.NC/build_unix && make
+
 test check: test_magi FORCE
 	./test_magi
 
@@ -213,7 +219,7 @@ obj/%.o: hash/%.c
 	  rm -f $(@:%.o=%.d)
 
 magid: $(OBJS:obj/%=obj/%)
-	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ $(xLDFLAGS) $(LIBS)
+	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ $(xLDFLAGS) $(LIBS) $(BDB_CXX_A)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
 
@@ -225,7 +231,10 @@ obj-test/%.o: test/%.cpp
 	  rm -f $(@:%.o=%.d)
 
 test_magi: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
-	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ -Wl,-B$(LMODE) -lboost_unit_test_framework $(xLDFLAGS) $(LIBS)
+	$(LINK) $(xCXXFLAGS) -o $@ $(LIBPATHS) $^ -Wl,-B$(LMODE) -lboost_unit_test_framework $(xLDFLAGS) $(LIBS) $(BDB_CXX_A)
+
+.PHONY: bdb
+bdb: $(BDB_CXX_A)
 
 clean:
 	-rm -f magid test_magi
@@ -235,4 +244,5 @@ clean:
 	-rm -f obj-test/*.P
 	-rm -f obj/build.h
 
+.PHONY: FORCE
 FORCE:

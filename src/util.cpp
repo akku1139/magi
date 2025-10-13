@@ -59,7 +59,9 @@ namespace boost {
 #endif
 
 #ifndef WIN32
+#ifdef _GLIBC_
 #include <execinfo.h>
+#endif
 #endif
 
 
@@ -1052,10 +1054,12 @@ void LogStackTrace() {
     if (fileout)
     {
 #ifndef WIN32
+#ifdef _GLIBC_
         void* pszBuffer[32];
         size_t size;
         size = backtrace(pszBuffer, 32);
         backtrace_symbols_fd(pszBuffer, size, fileno(fileout));
+#endif
 #endif
     }
 }

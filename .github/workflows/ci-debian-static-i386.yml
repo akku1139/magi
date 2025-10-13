@@ -1,0 +1,43 @@
+name: Magi build (Debian i386)
+on: [push]
+
+permissions:
+  packages: write
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+     image: i386/debian:stable-slim
+
+    steps:
+      - name: Install dependencies
+        run: |
+          dpkg --add-architecture amd64
+          apt-get update
+          apt-get install wget curl build-essential libssl-dev libgmp-dev libminiupnpc-dev libboost-all-dev libprotobuf-dev libqrencode-dev libc6-dev zlib1g-dev libstdc++-12-dev file nodejs:amd64 -y
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Berkeley DB
+        run: |
+          cd src/db-4.8.30.NC/build_unix && ../dist/configure --enable-cxx --disable-shared --with-pic CFLAGS="-pipe" CXXFLAGS="-pipe"
+          make -j6
+
+      #- name: Build LevelDB
+      #  run: cd src/leveldb && make -j6 libleveldb.a libmemenv.a CCFLAGS="-pipe" CXXFLAGS="-pipe"
+
+      - name: Compile Magi
+        run: |
+          cd src && make -f makefile.unix -j6 STATIC=1 CXXFLAGS="-pipe" LDFLAGS="-static-libgcc -static-libstdc++"
+          #/usr/lib/i386-linux-gnu/libc_nonshared.a
+          strip magid
+
+      - run: |
+          file src/magid
+          ldd src/magid
+
+      - name: Release
+        run: gh release create "build-$(date +%Y-%m-%d-%H-%M-%S)" ./src/magid
