@@ -1,4 +1,4 @@
-name: Magi build (Ubuntu)
+name: Magi build (Debian i386)
 on: [push]
 
 permissions:
