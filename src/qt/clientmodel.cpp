@@ -8,9 +8,13 @@
 #include "main.h"
 #include "ui_interface.h"
 
+#include <boost/bind/bind.hpp>
+#include <boost/bind/placeholders.hpp>
+
 #include <QDateTime>
 #include <QTimer>
 
+using namespace boost::placeholders;
 #include <functional>
 
 static const int64 nClientStartupTime = GetTime();
